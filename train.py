@@ -6,10 +6,11 @@ import numpy as np
 import random
 import pandas as pd
 from keras.applications.resnet import ResNet152
-from tensorflow.python.keras.models import Model
-from tensorflow.python.keras.layers import Flatten, Dense, Dropout
-from tensorflow.keras.optimizers import Adam
-from tensorflow.python.keras.preprocessing.image import ImageDataGenerator
+from keras.layers.core import Dense, Flatten
+from keras.layers import Activation,Dropout
+from keras.models import Model
+from keras.optimizers import Adam
+from keras.preprocessing.image import ImageDataGenerator
 
 """# Check files"""
 
