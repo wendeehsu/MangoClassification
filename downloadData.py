@@ -30,6 +30,6 @@ def save_response_content(response, destination):
             if chunk: # filter out keep-alive new chunks
                 f.write(chunk)
 
-file_id = '0B1fGSuBXAh1IeEpzajRISkNHckU'
-destination = '/C1-P1_Train.rar'
+file_id = '134R9FFEzLt2gMHLLOfRyZZrAZcPyqE1j'
+destination = '~/Desktop/Projects/MangoClassification/C1-P1_Train.rar'
 download_file_from_google_drive(file_id, destination)
