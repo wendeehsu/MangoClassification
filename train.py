@@ -4,6 +4,7 @@ import os, shutil
 import matplotlib.pyplot as plt
 import numpy as np
 import random
+import pandas as pd
 from tensorflow.python.keras.models import Model
 from tensorflow.python.keras.layers import Flatten, Dense, Dropout
 from tensorflow.keras.optimizers import Adam
@@ -11,18 +12,14 @@ from tensorflow.python.keras.preprocessing.image import ImageDataGenerator
 
 """# Check files"""
 
-path = "/C1-P1_Train"
+path = "./C1-P1_Train/"
 class_names =  ["A","B","C"]
 classNum = len(class_names)
 
-for className in class_names:
-    dir = path+"/"+className
-    files = os.listdir(dir)
-    imageNum = len(files)
-    print(className + " : " , imageNum)
-
 """# Load Data"""
-
+traindf=pd.read_csv("train.csv", header=None)
+traindf = traindf.rename(columns={0: "name", 1: "class"})
+print(traindf.head())
 target_size = (224,224)
 batch_size = 20
 
@@ -38,18 +35,22 @@ datagen = ImageDataGenerator(
     validation_split=0.2)
 
 #以 batch 的方式讀取資料
-train_batches = datagen.flow_from_directory(
-        path,  
+train_batches = datagen.flow_from_dataframe(
+        dataframe=traindf,
+        directory=path,
+        x_col="name",
+        y_col="class",
         target_size = target_size,  
         batch_size = batch_size,
-        classes = class_names,
         subset='training')
 
-valid_batches = datagen.flow_from_directory(
-        path,
+valid_batches = datagen.flow_from_dataframe(
+        dataframe=traindf,
+        directory=path,
+        x_col="name",
+        y_col="class",
         target_size = target_size,
         batch_size = batch_size,
-        classes = class_names,
         subset='validation')
 
 """# Build model"""
