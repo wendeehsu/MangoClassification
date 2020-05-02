@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import random
 import pandas as pd
+from keras.applications.resnet import ResNet152
 from tensorflow.python.keras.models import Model
 from tensorflow.python.keras.layers import Flatten, Dense, Dropout
 from tensorflow.keras.optimizers import Adam
@@ -55,11 +56,9 @@ valid_batches = datagen.flow_from_dataframe(
 
 """# Build model"""
 
-from tensorflow.python.keras.applications import resnet
-
 # 凍結網路層數
 FREEZE_LAYERS = 2
-net = resnet.ResNet152(include_top=False, 
+net = ResNet152(include_top=False, 
                weights="imagenet", 
                input_tensor=None,
                input_shape=(target_size[0],target_size[1],classNum),
