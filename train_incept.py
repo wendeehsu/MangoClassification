@@ -64,7 +64,7 @@ net = InceptionV3(include_top=False, weights="imagenet")
 x = net.output
 x = GlobalAveragePooling2D()(x)
 x = Dropout(0.5)(x)
-output_layer = Dense(class_num, activation='softmax')(x)
+output_layer = Dense(classNum, activation='softmax')(x)
 
 FREEZE_LAYERS = 2
 # 設定凍結與要進行訓練的網路層
